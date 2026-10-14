@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090a12">
+  <meta name="description" content="KeyBlitz is your personal typing arena. Improve speed, accuracy and consistency.">
+  <title>KeyBlitz — Neon Typing Arena</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="aurora aurora-one"></div>
+  <div class="aurora aurora-two"></div>
+  <div class="grid-overlay"></div>
+
+  <header class="navbar">
+    <a class="brand" href="#" aria-label="KeyBlitz home">
+      <span class="brand-mark">K<span>.</span></span>
+      <span>key<span class="brand-purple">blitz</span></span>
+    </a>
+
+    <div class="nav-actions">
+      <div class="online-status"><span></span> TYPING ARENA</div>
+      <button id="soundToggle" class="icon-button" aria-label="Turn typing sounds on" title="Toggle typing sound">
+        <span id="soundIcon">♪</span>
+      </button>
+      <button id="themeToggle" class="icon-button" aria-label="Switch theme" title="Switch theme">
+        <span id="themeIcon">☼</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div class="hero-tag"><span class="tag-spark">✦</span> THE NEXT-GEN TYPING EXPERIENCE</div>
+      <h1>Enter the <span class="gradient-text">flow state.</span></h1>
+      <p>Less hesitation. More precision. Beat your best, one keystroke at a time.</p>
+      <div class="hero-decoration"><span></span><span></span><span></span></div>
+    </section>
+
+    <section class="stats-grid" aria-label="Live statistics">
+      <article class="stat-card">
+        <div class="stat-heading">TYPING SPEED <span class="stat-icon purple">↗</span></div>
+        <div class="stat-number"><span id="wpm">100</span><small>WPM</small></div>
+        <div class="stat-caption">Words per minute</div>
+        <div class="mini-track"><span id="wpmTrack"></span></div>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-heading">ACCURACY <span class="stat-icon cyan">◎</span></div>
+        <div class="stat-number"><span id="accuracy">0</span><small>%</small></div>
+        <div class="stat-caption">Precision is power</div>
+        <div class="mini-track"><span id="accuracyTrack"></span></div>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-heading">TIME LEFT <span class="stat-icon pink">◷</span></div>
+        <div class="stat-number"><span id="time">30</span><small>SEC</small></div>
+        <div class="stat-caption" id="timerCaption">Ready to launch</div>
+        <div class="mini-track"><span id="timeTrack"></span></div>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-heading">PERSONAL BEST <span class="stat-icon gold">✦</span></div>
+        <div class="stat-number"><span id="best">0</span><small>WPM</small></div>
+        <div class="stat-caption">Your highest record</div>
+        <div class="mini-track"><span id="bestTrack"></span></div>
+      </article>
+    </section>
+
+    <section class="arena panel">
+      <div class="arena-header">
+        <div class="arena-title">
+          <div class="live-indicator"><span></span></div>
+          <div>
+            <h2>Typing arena</h2>
+            <p>Lock in. Find your rhythm.</p>
+          </div>
+        </div>
+
+        <div class="durations" aria-label="Choose test duration">
+          <button class="duration-btn" data-duration="15">15s</button>
+          <button class="duration-btn active" data-duration="30">30s</button>
+          <button class="duration-btn" data-duration="60">60s</button>
+        </div>
+      </div>
+
+      <div class="arena-progress"><span id="progressBar"></span></div>
+
+      <div class="passage-meta">
+        <span>01 <span class="meta-muted">/ TYPE THE PASSAGE</span></span>
+        <span id="testStatus">WAITING FOR INPUT</span>
+      </div>
+
+      <div id="typingText" class="typing-text" aria-label="Typing passage"></div>
+
+      <label for="typingInput" class="input-label">YOUR KEYSTROKES</label>
+      <textarea
+        id="typingInput"
+        class="typing-input"
+        placeholder="Click here and start typing..."
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        aria-label="Type the passage shown above"
+      ></textarea>
+
+      <div class="arena-footer">
+        <div class="keyboard-hint"><span class="hint-dot"></span> Your keyboard is ready</div>
+        <button id="restartBtn" class="secondary-button"><span>↻</span> Restart test</button>
+      </div>
+
+      <div class="keyboard-section">
+        <div class="keyboard-heading">
+          <span>LIVE KEYBOARD</span>
+          <span class="keyboard-legend"><i></i> Key detected</span>
+        </div>
+
+        <div id="keyboard" class="keyboard" aria-label="Visual keyboard">
+          <div class="key-row">
+            <span class="key" data-key="`">`</span>
+            <span class="key" data-key="1">1</span>
+            <span class="key" data-key="2">2</span>
+            <span class="key" data-key="3">3</span>
+            <span class="key" data-key="4">4</span>
+            <span class="key" data-key="5">5</span>
+            <span class="key" data-key="6">6</span>
+            <span class="key" data-key="7">7</span>
+            <span class="key" data-key="8">8</span>
+            <span class="key" data-key="9">9</span>
+            <span class="key" data-key="0">0</span>
+            <span class="key" data-key="-">-</span>
+            <span class="key" data-key="=">=</span>
+            <span class="key key-wide" data-key="Backspace">⌫</span>
+          </div>
+          <div class="key-row">
+            <span class="key key-wide" data-key="Tab">Tab</span>
+            <span class="key" data-key="q">Q</span>
+            <span class="key" data-key="w">W</span>
+            <span class="key" data-key="e">E</span>
+            <span class="key" data-key="r">R</span>
+            <span class="key" data-key="t">T</span>
+            <span class="key" data-key="y">Y</span>
+            <span class="key" data-key="u">U</span>
+            <span class="key" data-key="i">I</span>
+            <span class="key" data-key="o">O</span>
+            <span class="key" data-key="p">P</span>
+            <span class="key" data-key="[">[</span>
+            <span class="key" data-key="]">]</span>
+            <span class="key key-wide" data-key="\\">\</span>
+          </div>
+          <div class="key-row">
+            <span class="key key-extra" data-key="CapsLock">Caps</span>
+            <span class="key" data-key="a">A</span>
+            <span class="key" data-key="s">S</span>
+            <span class="key" data-key="d">D</span>
+            <span class="key" data-key="f">F</span>
+            <span class="key" data-key="g">G</span>
+            <span class="key" data-key="h">H</span>
+            <span class="key" data-key="j">J</span>
+            <span class="key" data-key="k">K</span>
+            <span class="key" data-key="l">L</span>
+            <span class="key" data-key=";">;</span>
+            <span class="key" data-key="'">'</span>
+            <span class="key key-extra" data-key="Enter">Enter</span>
+          </div>
+          <div class="key-row">
+            <span class="key key-shift" data-key="Shift">Shift</span>
+            <span class="key" data-key="z">Z</span>
+            <span class="key" data-key="x">X</span>
+            <span class="key" data-key="c">C</span>
+            <span class="key" data-key="v">V</span>
+            <span class="key" data-key="b">B</span>
+            <span class="key" data-key="n">N</span>
+            <span class="key" data-key="m">M</span>
+            <span class="key" data-key=",">,</span>
+            <span class="key" data-key=".">.</span>
+            <span class="key" data-key="/">/</span>
+            <span class="key key-shift" data-key="Shift">Shift</span>
+          </div>
+          <div class="key-row">
+            <span class="key key-space" data-key=" ">SPACE</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resultPanel" class="result-panel panel hidden" aria-live="polite">
+      <div class="result-orb">✦</div>
+      <div class="result-eyebrow">SESSION COMPLETE</div>
+      <h2 id="resultHeading">Nice run!</h2>
+      <p id="resultMessage">Every keystroke takes you further.</p>
+
+      <div class="result-stats">
+        <div><span>WPM</span><strong id="resultWpm">0</strong></div>
+        <div><span>ACCURACY</span><strong id="resultAccuracy">100%</strong></div>
+        <div><span>ERRORS</span><strong id="resultErrors">0</strong></div>
+      </div>
+
+      <!-- Weak Keys Section in Result Panel -->
+      <div id="weakKeysContainer" class="weak-keys-container hidden">
+        <span class="weak-keys-title">WEAK KEYS THIS SESSION:</span>
+        <div id="weakKeysList" class="weak-keys-list"></div>
+      </div>
+
+      <button id="tryAgainBtn" class="primary-button">Run it back <span>→</span></button>
+    </section>
+
+    <section class="history-section panel">
+      <div class="history-header">
+        <div>
+          <div class="section-eyebrow">YOUR PROGRESS</div>
+          <h2>Performance history<span class="title-dot">.</span></h2>
+          <p>Your last seven completed sessions.</p>
+        </div>
+        <div class="history-badge"><span>↗</span> WPM TREND</div>
+      </div>
+
+      <div id="chartEmpty" class="chart-empty">Complete your first test to start building your history.</div>
+      <div id="historyChart" class="history-chart hidden">
+        <svg id="chartSvg" viewBox="0 0 600 190" role="img" aria-label="Typing speed history chart"></svg>
+      </div>
+
+      <div class="history-footer">
+        <span id="historyCount">0 sessions recorded</span>
+        <button id="clearHistoryBtn" class="text-button">Clear history</button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <a class="footer-brand" href="#">KEYBLITZ<span>.</span></a>
+      <p>Built for focus. Designed for speed.</p>
+      <div>© 2026 KEYBLITZ · PRACTICE. IMPROVE. REPEAT.</div>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
